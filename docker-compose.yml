@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres:17.2
+    container_name: khg_postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: p0StgResQl
+      POSTGRES_USER: p0sTgUS3r
+    command: ["-c", "max_connections=300"]
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
+  consul:
+    image: hashicorp/consul:1.20.1
+    container_name: khg_consul
+    restart: always
+    ports:
+      - "8500:8500"
